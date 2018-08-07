@@ -1,0 +1,395 @@
+<%@Master language="C#"%>
+    <%@Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>
+        <%@Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>
+            <%@Register TagPrefix="wssucmui" TagName="MUISelector" Src="~/_controltemplates/15/MUISelector.ascx"%>
+                <%@Register TagPrefix="wssuc" TagName="Welcome" Src="~/_controltemplates/15/Welcome.ascx"%>
+                    <%@Register TagPrefix="SearchWC" Namespace="Microsoft.Office.Server.Search.WebControls" Assembly="Microsoft.Office.Server.Search, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>
+                        <%@Register TagPrefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation" Assembly="Microsoft.SharePoint.Publishing, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>
+                            <%@Register TagPrefix="PublishingRibbon" TagName="PublishingRibbon" Src="~/_controltemplates/15/Ribbon.ascx"%>
+                                <!DOCTYPE HTML>
+
+                                <SharePoint:SPHtmlTag runat="server" id="SPHtmlTag" dir="<%$Resources:wss,multipages_direction_dir_value%>">
+
+                                    <head runat="server">
+                                        <script>
+                                            LoadObject = [];
+                                        </script>
+                                        <meta http-equiv="X-UA-Compatible" content="IE=10" />
+                                        <meta charset="utf-8" />
+                                        <meta name="GENERATOR" content="Microsoft SharePoint" />
+                                        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+                                        <meta http-equiv="Expires" content="0" />
+
+                                        <!-- ===== STARTER: Robots  ======================================================================================================= -->
+                                        <SharePoint:RobotsMetaTag runat="server" />
+
+                                        <!-- ===== STARTER: Favicon / Windows Tile ======================================================================================== -->
+                                        <SharePoint:SPShortcutIcon runat="server" IconUrl="/sites/greif/_catalogs/masterpage/GreifCustom/img/favicon.ico" />
+
+                                        <!-- ===== STARTER: Page Title loaded from page or page layout ==================================================================== -->
+                                        <SharePoint:PageTitle runat="server">
+                                            <asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server">
+                                                <SharePoint:ProjectProperty Property="Title" runat="server" />
+                                            </asp:ContentPlaceHolder>
+                                        </SharePoint:PageTitle>
+
+                                        <!-- ===== STARTER: SP Scripts and CSS  =========================================================================================== -->
+                                        <SharePoint:StartScript runat="server" />
+                                        <SharePoint:CssLink runat="server" Version="15" />
+
+                                        <SharePoint:PageRenderMode runat="server" RenderModeType="Standard" />
+                                        <SharePoint:ScriptLink language="javascript" name="core.js" OnDemand="true" runat="server" Localizable="false" />
+                                        <SharePoint:ScriptLink language="javascript" name="menu.js" OnDemand="true" runat="server" Localizable="false" />
+                                        <SharePoint:ScriptLink language="javascript" name="callout.js" OnDemand="true" runat="server" Localizable="false" />
+                                        <SharePoint:ScriptLink language="javascript" name="sharing.js" OnDemand="true" runat="server" Localizable="false" />
+                                        <SharePoint:ScriptLink language="javascript" name="suitelinks.js" OnDemand="true" runat="server" Localizable="false" />
+                                        <SharePoint:CustomJSUrl runat="server" />
+                                        <SharePoint:SoapDiscoveryLink runat="server" />
+
+                                        <!-- ===== STARTER: Additional header placeholder - overridden by asp:content on pages or page layouts  =========================== -->
+                                        <asp:ContentPlaceHolder ID="PlaceHolderAdditionalPageHead" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                        <SharePoint:DelegateControl runat="server" ControlId="AdditionalPageHead" AllowMultipleControls="true" />
+
+                                        <!-- ===== STARTER: Core SharePoint CSS =========================================================================================== -->
+                                        <SharePoint:CssRegistration Name="Themable/corev15.css" runat="server" />
+
+                                        <!-- ===== STARTER: Custom CSS  =================================================================================================== -->
+                                        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+                                        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                                        <!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+                                        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+                                        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                                        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+                                        <SharePoint:CssRegistration ID="BootStrapCSS" name="<% $SPUrl:~sitecollection/_catalogs/masterpage/GreifCustom/css/bootstrap.min.css %>"
+                                            runat="server" after="SharepointCssFile" />
+                                        <SharePoint:CssRegistration ID="CustomCSS" name="<% $SPUrl:~sitecollection/_catalogs/masterpage/GreifCustom/css/site.css %>"
+                                            runat="server" after="BootStrapCSS" />
+                                    </head>
+
+                                    <body class="interior-page">
+                                        <!-- ===== STARTER: SP IDs / Prefetch SP images / SP Form  =========================================================================== -->
+                                        <SharePoint:SPClientIDGenerator runat="server" ServerControlID="DeltaPlaceHolderMain;DeltaPlaceHolderPageTitleInTitleArea;DeltaPlaceHolderUtilityContent"
+                                        />
+                                        <SharePoint:ImageLink runat="server" />
+                                        <SharePoint:SharePointForm onsubmit="if (typeof(_spFormOnSubmitWrapper) != 'undefined') {return _spFormOnSubmitWrapper();} else {return true;}"
+                                            runat="server">
+
+                                            <!-- ===== STARTER: SharePoint Reqs this for adding columns ===================================================== -->
+                                            <script type="text/javascript">
+                                                var submitHook = function () {
+                                                    return false;
+                                                };
+                                                theForm._spOldSubmit = theForm.submit;
+                                                theForm.submit = function () {
+                                                    if (!submitHook()) {
+                                                        this._spOldSubmit();
+                                                    }
+                                                };
+                                            </script>
+
+                                            <!-- ===== STARTER: Web Part Manager  ============================================================================================= -->
+                                            <WebPartPages:SPWebPartManager runat="server" />
+
+                                            <!-- ===== STARTER: ScriptManager ===================================================== -->
+                                            <asp:ScriptManager id="ScriptManager" runat="server" EnablePageMethods="false" EnablePartialRendering="true" EnableScriptGlobalization="false"
+                                                EnableScriptLocalization="true" />
+
+                                            <!-- ===== STARTER: Ribbon Code Starts Here ===================================================== -->
+                                            <PublishingRibbon:PublishingRibbon runat="server" />
+
+                                            <!-- ===== STARTER: Ribbon Code Ends Here  ======================================================================================== -->
+
+                                            <!-- ===== STARTER: Authentication / Login link hidden for everyone by anonymous users  =========================================== -->
+                                            <SharePoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly">
+
+
+
+                                                <wssuc:Welcome runat="server" EnableViewState="false" />
+                                            </SharePoint:SPSecurityTrimmedControl>
+                                            <style>
+                                                /* Create three equal columns that floats next to each other */
+
+                                            </style>
+                                            <div class="GreifCustom_row">
+                                                <div class="GreifCustom_column GreifCustom_LogoColumn">
+                                                    <SharePoint:SPLinkButton runat="server" NavigateUrl="~sitecollection/">
+                                                        <SharePoint:SiteLogoImage ID="x63829de2201a4365a3904788f682d0a3" LogoImageUrl="<% $SPUrl:~sitecollection/_catalogs/masterpage/GreifCustom/img/logo.png %>"
+                                                            Height="50" AlternateText="Back to Home" CssClass="site-logo" runat="server"
+                                                        />
+                                                    </SharePoint:SPLinkButton>
+                                                </div>
+                                                <div class="GreifCustom_column GreifCustom_Navcolumn">
+                                                    <SharePoint:AspMenu ID="TopNavigationMenu" runat="server" EnableViewState="false" DataSourceID="topSiteMap" AccessKey="<%$Resources:wss,navigation_accesskey%>"
+                                                        UseSimpleRendering="true" UseSeparateCss="false" Orientation="Horizontal"
+                                                        StaticDisplayLevels="1" AdjustForShowStartingNode="true" MaximumDynamicDisplayLevels="1"
+                                                        SkipLinkText="" />
+                                                </div>
+
+                                            </div>
+                                            <div class="searchcontainer">
+                                                <asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
+                                                    <SearchWC:SearchBoxScriptWebPart UseSiteCollectionSettings="true" EmitrySuggestions="true" ChromeType="None" UseSharedSettings="true"
+                                                        TryInplaceQuery="false" ServerInitialRender="true" runat="server"
+                                                        __WebPartId="{353E666E-37E4-44C6-B909-3AFF15671FDA}" __MarkupType="vsattributemarkup"
+                                                        WebPart="true" Height="" Width="" />
+                                                </asp:ContentPlaceHolder>
+                                            </div>
+                                            <!-- ===== STARTER: Main Scrolling Body Starts Here =============================================================================== -->
+                                            <div id="s4-workspace">
+                                                <div id="s4-bodyContainer">
+
+                                                    <!-- ===== STARTER: This decides where the web part menu lives ===================================================== -->
+                                                    <div id="DeltaPlaceHolderMain" runat="server">
+
+                                                        <!-- ===== STARTER: style.css adds width and margin =========================================================================================== -->
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <!-- ===== STARTER: SharePoint looks for this div ID s4-titlerow for the "Focus on Content" Button ======================== -->
+                                                                <div id="s4-titlerow">
+
+
+                                                                    <!-- ===== STARTER: Global navigation ================================================================================= -->
+                                                                    <div class="ms-dialogHidden">
+                                                                        <div class="ms-displayInline ms-core-navigation ms-dialogHidden">
+                                                                            <PublishingNavigation:PortalSiteMapDataSource ID="topSiteMap" runat="server" EnableViewState="false" SiteMapProvider="GlobalNavigationSwitchableProvider"
+                                                                                StartFromCurrentNode="true" StartingNodeOffset="0"
+                                                                                ShowStartingNode="false" TrimNonCurrentTypes="Heading"
+                                                                            />
+
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <!-- ===== STARTER: Breadcrumbs ======================================================================================= -->
+                                                                    <div class="ms-dialogHidden">
+                                                                        <h1 id="pageTitle" class="ms-core-pageTitle">
+                                                                            <!-- ===== STARTER: SP Reqs DeltaPlaceHolderPageTitleInTitleArea and PlaceHolderPageTitleInTitleArea for adding Apps in Site Content =================== -->
+                                                                            <SharePoint:AjaxDelta id="DeltaPlaceHolderPageTitleInTitleArea" runat="server">
+                                                                                <asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server">
+                                                                                    <SharePoint:SPTitleBreadcrumb runat="server" RenderCurrentNodeAsLink="true" SiteMapProvider="SPContentMapProvider" CentralAdminSiteMapProvider="SPXmlAdminContentMapProvider">
+
+
+
+
+
+                                                                                        <PATHSEPARATORTEMPLATE>
+                                                                                            <SharePoint:ClusteredDirectionalSeparatorArrow runat="server" />
+                                                                                        </PATHSEPARATORTEMPLATE>
+                                                                                    </SharePoint:SPTitleBreadcrumb>
+                                                                                </asp:ContentPlaceHolder>
+                                                                            </SharePoint:AjaxDelta>
+
+                                                                            <div class="ms-displayInlineBlock ms-normalWrap">
+                                                                                <a href="javascript:;" id="ms-pageDescriptionDiv" style="display:none;">
+                                                                                    <span id="ms-pageDescriptionImage">&#160;</span>
+                                                                                </a>
+                                                                                <span class="ms-accessible" id="ms-pageDescription">
+                                                                                    <asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server" />
+                                                                                </span>
+                                                                                <SharePoint:ScriptBlock runat="server">
+
+
+
+                                                                                    _spBodyOnLoadFunctionNames.push("setupPageDescriptionCallout");
+                                                                                </SharePoint:ScriptBlock>
+                                                                            </div>
+                                                                        </h1>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- ===== STARTER: Body Area (includes left nav and body) ==================================================================== -->
+
+                                                                <!-- ===== STARTER: Current navigation =========================================================================================== -->
+                                                                <div id="sideNavBox" class="ms-dialogHidden ms-forceWrap ms-noList">
+                                                                    <div class="ms-core-navigation">
+                                                                        <!-- ===== STARTER: SP Reqs PlaceHolderLeftNavBar for adding Apps in Site Content =================== -->
+                                                                        <asp:ContentPlaceHolder ID="PlaceHolderLeftNavBar" runat="server">
+                                                                            <asp:ContentPlaceHolder ID="PlaceHolderLeftNavBarTop" runat="server">
+                                                                                <!-- ===== STARTER: hide the quick launch for any page the doesn't override the PlaceHolderLeftNavBar ============ -->
+                                                                                <!-- ===== STARTER: if you want the navigation back you can add it from the collab master ============ -->
+                                                                                <style type="text/css">
+                                                                                    #contentBox {
+                                                                                        margin-left: 0;
+                                                                                    }
+
+                                                                                    #sideNavBox {
+                                                                                        display: none;
+                                                                                    }
+                                                                                </style>
+                                                                            </asp:ContentPlaceHolder>
+                                                                            <asp:ContentPlaceHolder ID="PlaceHolderQuickLaunchTop" runat="server" />
+                                                                            <asp:ContentPlaceHolder ID="PlaceHolderLeftNavBarDataSource" runat="server" />
+                                                                            <asp:ContentPlaceHolder ID="PlaceHolderCalendarNavigator" runat="server" />
+                                                                            <asp:ContentPlaceHolder ID="PlaceHolderLeftActions" runat="server" />
+                                                                            <asp:ContentPlaceHolder ID="PlaceHolderQuickLaunchBottom" runat="server" />
+                                                                        </asp:ContentPlaceHolder>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- ===== STARTER: Main Content ========================================================================================== -->
+                                                                <div id="contentBox">
+                                                                    <!-- ===== STARTER: Status bar / also used for notifications in 365 ======================================= -->
+                                                                    <SharePoint:AjaxDelta id="DeltaPageStatusBar" BlockElement="true" runat="server">
+                                                                        <div id="pageStatusBar"></div>
+                                                                    </SharePoint:AjaxDelta>
+                                                                    <!-- ===== STARTER: Main Placeholder gets replaced with content of the page ======================================= -->
+                                                                    <asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server" />
+                                                                </div>
+                                                                <div style="clear:both;" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- begin footer -->
+                                                    <div class="footer footer2">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 col-xs-offset-1">
+                                                                    <h3>Products &amp; Services
+                                                                    </h3>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">Steel Drums</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">IBCs</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Plastic Drums</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Jerrycans</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Water Bottles</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-xs-3 col-xs-offset-1">
+                                                                    <h3>Markets Served</h3>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">Commodity Chemicals</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Agrochecmicals</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Specialty Chemicals</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Detergents &amp; Surfactants</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Paints, Coatings &amp; Inks</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-xs-3 col-xs-offset-1">
+                                                                    <h3>Sustainability</h3>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">Overview</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">People</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Planet</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Products &amp; Innovation</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Sustainability reports</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="footer footer3">
+                                                        <div style="margin: 8px;">
+                                                            <a href="#" class="footer-brand">
+                                                                <img src="<% $SPUrl:~sitecollection/_catalogs/masterpage/GreifCustom/img/greiflogo.png%>" runat="server">
+                                                            </a> © Copyright 2017 Greif. All Rights Reserved.
+                                                        </div>
+                                                    </div>
+                                                    <!-- end footer -->
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <!-- <script src="http://hmbsharepoint.eastus2.cloudapp.azure.com/sites/greif/SiteAssets/HomePage/GreifCustom/combinedDataLoader.js"></script> -->
+
+                                            <!-- ===== STARTER: Main Scrolling Body Ends Here ================================================================================= -->
+
+                                            <!-- ===== STARTER: Needed for form stuff ========================================================================================= -->
+                                            <asp:ContentPlaceHolder id="PlaceHolderFormDigest" runat="server">
+                                                <SharePoint:formdigest runat="server" />
+                                            </asp:ContentPlaceHolder>
+
+                                            <!-- ===== STARTER: Hidden Placeholders =========================================================================================== -->
+                                            <asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderTitleAreaClass" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderTitleBreadcrumb" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderGlobalNavigationSiteMap" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderGlobalNavigation" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderHorizontalNav" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderTopNavBar" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderSiteName" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderPageImage" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderTitleLeftBorder" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderMiniConsole" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderTitleRightMargin" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderTitleAreaSeparator" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderNavSpacer" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderLeftNavBarBorder" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderBodyLeftBorder" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="PlaceHolderBodyRightMargin" Visible="False" runat="server" />
+                                            <asp:ContentPlaceHolder id="WSSDesignConsole" Visible="False" runat="server" />
+
+                                        </SharePoint:SharePointForm>
+
+
+
+
+                                        <!-- ===== STARTER: Adds extra stuff like another form for Survey management ====================================================== -->
+                                        <asp:ContentPlaceHolder id="PlaceHolderUtilityContent" runat="server" />
+                                        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                                        <SharePoint:ScriptLink language="javascript" name="GreifCustom/js/bootstrap.min.js " />
+                                        <script type="text/javascript " src="https://code.jquery.com/ui/1.11.4/jquery-ui.js "></script>
+
+                                        <script type="text/javascript ">
+                                            $(document).ready(function () {
+                                                function rotateActiveNews() {
+                                                    var activenews = $(".newssecondary.active ");
+                                                    if (activenews.next(".newssecondary ").length == 0) {
+                                                        activenews.removeClass("active ");
+                                                        $(".newssecondary ").first().addClass("active ");
+                                                    } else {
+                                                        activenews.removeClass("active ");
+                                                        activenews.next(".newssecondary ").addClass("active ");
+                                                    }
+
+                                                    $(".newsprimarycontainer img ").attr("src ", $(
+                                                        ".newssecondary.active img ").attr("src "))
+
+                                                    setTimeout(rotateActiveNews, 5000);
+                                                }
+                                                rotateActiveNews();
+
+                                                $(".datepicker ").datepicker();
+
+                                            });
+                                        </script>
+                                    </body>
+
+                                    <!-- I started life as an open source Starter Master Page - More Info: http://bit.ly/sp2016-starter-master-pages - RTM Version - March 14, 2016 -->
+                                </SharePoint:SPHtmlTag>

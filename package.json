@@ -1,0 +1,29 @@
+{
+  "name": "sharepointportal",
+  "version": "1.0.0",
+  "description": "Branding and Home page web parts for SharePoint",
+  "main": "./code/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danieltbrandt/SharePointBranding.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "gulp": "^3.9.1",
+    "gulp-watch": "^5.0.0",
+    "spsave": "^3.1.5",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  },
+  "dependencies": {
+    "@types/sharepoint": "^2016.1.0",
+    "ajv": "^6.4.0",
+    "ts-loader": "^4.1.0",
+    "typescript": "^2.8.1"
+  }
+}

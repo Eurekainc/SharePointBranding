@@ -23,6 +23,7 @@
   "dependencies": {
     "@types/sharepoint": "^2016.1.0",
     "ajv": "^6.4.0",
+    "all": "0.0.0",
     "ts-loader": "^4.1.0",
     "typescript": "^2.8.1"
   }

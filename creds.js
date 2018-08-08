@@ -6,7 +6,7 @@
 //     ttl: 60
 // };
 module.exports = {
-    //username: 'ad-admin',
-    //password: 'Hmb6142018!1',
-    //domain: 'corp'
+    username: 'username',
+    password: 'password',
+    domain: 'research'
 };
